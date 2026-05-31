@@ -505,11 +505,12 @@
       btn.disabled = true;
 
       try {
-        await fetch('https://script.google.com/macros/s/AKfycbzuR6qqkSjcySmJHnpHoRBTW3lvN2b1RT8FbSrDr3zypNn28mK0oHLIQgZiAjemtOQ3/exec', {
+        const formData = new URLSearchParams({ dream, reason, plan, expectation, deposit, contact });
+        await fetch('https://script.google.com/macros/s/AKfycbxCB1LE5EJVVN_pjpj-FXLnfkdyv4jUs4tomyDD-4zSisgAVRePBL86ubCwYOXCap2s/exec', {
           method: 'POST',
           mode: 'no-cors',
-          headers: { 'Content-Type': 'text/plain' },
-          body: JSON.stringify({ dream, reason, plan, expectation, deposit, contact })
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: formData.toString()
         });
         document.getElementById('applyForm').style.display = 'none';
         document.getElementById('formSuccess').style.display = 'block';
