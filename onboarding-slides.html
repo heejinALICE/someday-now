@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>언젠가 말고, 지금! 1기 온보딩</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:#1a1a1a; font-family:'Apple SD Gothic Neo','Noto Sans KR',sans-serif; overflow:hidden; }
+
+    .slides { width:100vw; height:100vh; position:relative; }
+
+    .slide {
+      position:absolute; inset:0;
+      display:flex; flex-direction:column; justify-content:center; align-items:center;
+      padding:60px; opacity:0; pointer-events:none;
+      transition:opacity 0.4s ease;
+    }
+    .slide.active { opacity:1; pointer-events:all; }
+
+    /* Slide 1 */
+    .s1 .tag { font-size:13px; letter-spacing:0.2em; color:#8a7d68; text-transform:uppercase; margin-bottom:28px; }
+    .s1 h1 { font-size:clamp(40px,7vw,72px); font-weight:900; color:#f5f0e8; text-align:center; line-height:1.2; }
+    .s1 h1 span { color:#b8a98a; display:block; }
+    .s1 .sub { font-size:16px; color:#666; margin-top:32px; font-style:italic; }
+
+    /* Slide 2 */
+    .s2 { align-items:flex-start; }
+    .s2 h2 { font-size:32px; font-weight:700; color:#f5f0e8; margin-bottom:8px; }
+    .s2 .divider { width:100%; height:1px; background:#333; margin-bottom:36px; }
+    .s2 .cards { display:grid; grid-template-columns:1fr 1fr; gap:20px; width:100%; max-width:900px; }
+    .s2 .card { background:#272727; border-radius:12px; padding:28px; }
+    .s2 .card .label { font-size:14px; font-weight:700; margin-bottom:16px; }
+    .s2 .card .label.red { color:#e07070; }
+    .s2 .card .label.green { color:#7eb87e; }
+    .s2 .card p { font-size:15px; color:#ccc; line-height:1.8; }
+    .s2 .footnote { margin-top:24px; font-size:14px; color:#555; font-style:italic; text-align:center; width:100%; max-width:900px; }
+
+    /* Nav */
+    .nav {
+      position:fixed; bottom:28px; left:50%; transform:translateX(-50%);
+      display:flex; gap:16px; align-items:center;
+    }
+    .nav button {
+      background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12);
+      color:#b8a98a; font-size:18px; width:44px; height:44px;
+      border-radius:50%; cursor:pointer; transition:background 0.2s;
+    }
+    .nav button:hover { background:rgba(255,255,255,0.15); }
+    .nav button:disabled { opacity:0.2; cursor:default; }
+    .nav .count { font-size:13px; color:#555; min-width:40px; text-align:center; }
+  </style>
+</head>
+<body>
+<div class="slides">
+
+  <!-- Slide 1 -->
+  <div class="slide s1 active">
+    <div class="tag">언젠가 말고, 지금! 1기</div>
+    <h1>언젠가 말고,<span>지금!</span></h1>
+    <p class="sub">함께해줘서 반가워요. 오늘부터 6주가 시작됩니다.</p>
+  </div>
+
+  <!-- Slide 2 -->
+  <div class="slide s2">
+    <h2 style="max-width:900px;width:100%;">이 모임은 무엇인가요?</h2>
+    <div class="divider" style="max-width:900px;"></div>
+    <div class="cards">
+      <div class="card">
+        <div class="label red">❌ 아닌 것</div>
+        <p>꿈을 완성하는 모임이 아니에요.<br/>성과나 수익을 내는 모임도 아니에요.</p>
+      </div>
+      <div class="card">
+        <div class="label green">✅ 맞는 것</div>
+        <p>꿈을 <strong style="color:#f5f0e8;">아주 작게 실행해보면서</strong><br/>그게 진짜 내 꿈인지 확인하는 모임이에요.</p>
+      </div>
+    </div>
+    <p class="footnote">6주가 끝날 때, 내가 진짜 원하는 게 무엇인지 조금 더 선명해지는 것 — 그게 전부예요.</p>
+  </div>
+
+</div>
+
+<div class="nav">
+  <button id="prev" onclick="go(-1)" disabled>←</button>
+  <span class="count" id="count">1 / 2</span>
+  <button id="next" onclick="go(1)">→</button>
+</div>
+
+<script>
+  let cur = 0;
+  const slides = document.querySelectorAll('.slide');
+  function go(d) {
+    slides[cur].classList.remove('active');
+    cur = Math.max(0, Math.min(slides.length-1, cur+d));
+    slides[cur].classList.add('active');
+    document.getElementById('count').textContent = (cur+1)+' / '+slides.length;
+    document.getElementById('prev').disabled = cur===0;
+    document.getElementById('next').disabled = cur===slides.length-1;
+  }
+  document.addEventListener('keydown', e => {
+    if(e.key==='ArrowRight'||e.key==='ArrowDown') go(1);
+    if(e.key==='ArrowLeft'||e.key==='ArrowUp') go(-1);
+  });
+</script>
+</body>
+</html>
