@@ -508,7 +508,7 @@
         await fetch('https://script.google.com/macros/s/AKfycbzuR6qqkSjcySmJHnpHoRBTW3lvN2b1RT8FbSrDr3zypNn28mK0oHLIQgZiAjemtOQ3/exec', {
           method: 'POST',
           mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'text/plain' },
           body: JSON.stringify({ dream, reason, plan, expectation, deposit, contact })
         });
         document.getElementById('applyForm').style.display = 'none';
