@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>언젠가 말고, 지금! 1기 모집</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      background: #faf9f7;
+      color: #2c2c2c;
+      line-height: 1.8;
+    }
+
+    .hero {
+      background: #1a1a1a;
+      color: #f5f0e8;
+      padding: 80px 24px 72px;
+      text-align: center;
+    }
+
+    .hero .tag {
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #b8a98a;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 6vw, 48px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      margin-bottom: 20px;
+    }
+
+    .hero .subtitle {
+      font-size: clamp(15px, 2.5vw, 18px);
+      color: #a89f92;
+      max-width: 480px;
+      margin: 0 auto 36px;
+    }
+
+    .hero .period-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 100px;
+      padding: 10px 24px;
+      font-size: 14px;
+      color: #d4c9b6;
+    }
+
+    .section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px;
+    }
+
+    .section + .section {
+      border-top: 1px solid #e8e4de;
+    }
+
+    .section h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 28px;
+      color: #1a1a1a;
+    }
+
+    .section p {
+      font-size: 16px;
+      color: #444;
+      margin-bottom: 16px;
+    }
+
+    .section p:last-child { margin-bottom: 0; }
+
+    .question-block {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .list-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .list-items li {
+      display: flex;
+      gap: 12px;
+      font-size: 16px;
+      color: #444;
+    }
+
+    .list-items li::before {
+      content: '—';
+      color: #b8a98a;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .schedule-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid #e0dbd3;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .schedule-row {
+      display: grid;
+      grid-template-columns: 80px 120px 1fr;
+      gap: 0;
+    }
+
+    .schedule-row:not(:last-child) {
+      border-bottom: 1px solid #e0dbd3;
+    }
+
+    .schedule-row.header {
+      background: #f0ece4;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #888;
+    }
+
+    .schedule-cell {
+      padding: 14px 16px;
+      font-size: 15px;
+      color: #333;
+      border-right: 1px solid #e0dbd3;
+    }
+
+    .schedule-cell:last-child { border-right: none; }
+
+    .schedule-row.header .schedule-cell { color: #888; font-size: 12px; }
+
+    .deposit-box {
+      background: #f5f1eb;
+      border-radius: 12px;
+      padding: 28px;
+    }
+
+    .deposit-box .deposit-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #e5e0d8;
+      font-size: 15px;
+      color: #444;
+      gap: 12px;
+    }
+
+    .deposit-box .deposit-row:last-child { border-bottom: none; }
+
+    .deposit-box .deposit-row .label { font-weight: 600; color: #1a1a1a; flex-shrink: 0; }
+
+    .deposit-box .account {
+      background: #1a1a1a;
+      color: #f5f0e8;
+      border-radius: 8px;
+      padding: 14px 20px;
+      font-size: 15px;
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .deposit-box .account .bank { color: #b8a98a; font-size: 13px; }
+
+    .operator-box {
+      background: #fff;
+      border: 1px solid #e0dbd3;
+      border-radius: 12px;
+      padding: 28px;
+    }
+
+    .operator-box p {
+      color: #555;
+    }
+
+    .cta-section {
+      background: #1a1a1a;
+      padding: 72px 24px;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-size: clamp(22px, 4vw, 32px);
+      font-weight: 700;
+      color: #f5f0e8;
+      margin-bottom: 12px;
+    }
+
+    .cta-section p {
+      font-size: 15px;
+      color: #a89f92;
+      margin-bottom: 36px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: #b8a98a;
+      color: #1a1a1a;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 18px 48px;
+      border-radius: 100px;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .cta-btn:hover {
+      background: #cbbe9e;
+      transform: translateY(-2px);
+    }
+
+    .cta-note {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #666;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 13px;
+      color: #aaa;
+      background: #faf9f7;
+    }
+
+    @media (max-width: 480px) {
+      .schedule-row { grid-template-columns: 60px 100px 1fr; }
+      .schedule-cell { padding: 12px 10px; font-size: 13px; }
+      .deposit-box .deposit-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="tag">언젠가, 지금! 1기</div>
+    <h1>"언젠가 때가 되면<br/>해야지."</h1>
+    <p class="subtitle">그 언젠가가 몇 년째 언젠가인 사람,<br/>여기 있지 않으신가요?</p>
+    <div class="period-badge">모집 6/1 – 6/7 · 시작 6/11</div>
+  </div>
+
+  <!-- 공감 -->
+  <div class="section">
+    <p>돈 모이면, 자리 잡히면, 준비되면.<br/>조건이 맞으면 그때 하겠다고 미뤄둔 그 일.</p>
+    <p>근데 솔직히 물어볼게요.<br/>10년 뒤 드디어 그걸 해봤는데, 막상 해보니 내가 원했던 게 아니라면요?<br/>그때쯤엔 이미 그 꿈이 식어있다면요?</p>
+  </div>
+
+  <!-- 이런 분 -->
+  <div class="section">
+    <h2>이런 분들 이야기예요.</h2>
+    <ul class="list-items">
+      <li>퇴근하고 나면 유튜브 보는 게 전부인데, 사실 내가 직접 뭔가를 만들고 무대에 서고 싶은</li>
+      <li>언젠가 내 이름으로 된 걸 세상에 내놓고 싶은데, 아직 준비가 덜 됐다는 생각에 계속 미루는</li>
+      <li>돈보다 의미 있는 일을 하며 살고 싶은데, 지금 당장은 현실적으로 그럴 수 없다고 스스로 선을 긋는</li>
+      <li>누군가한테 영향을 주는 삶을 살고 싶은데, 내가 그럴 자격이 있는지 자꾸 의심하게 되는</li>
+    </ul>
+  </div>
+
+  <!-- 모임 소개 -->
+  <div class="section">
+    <h2>〈언젠가, 지금!〉은 이런 모임이에요.</h2>
+    <p>꿈을 완성하는 모임이 아니에요.<br/>꿈을 <strong>아주 작게 실행해보면서, 그게 진짜 내 꿈인지 확인하는</strong> 모임이에요.</p>
+    <p>실행의 목적은 수익도, 성과도 아니에요.<br/>내가 오래 꿈꿔온 그 일을 직접 겪어보면서 그 과정에서 어떤 감정이 올라오는지, 생각했던 것과 어떻게 다른지, 그 간극을 기록하고 함께 나눕니다.</p>
+    <p>비슷한 결의 사람들과 연결되고, 서로의 과정을 보며 자극받고, 6주가 끝났을 때 내가 진짜 원하는 게 무엇인지 조금 더 선명해지는 것. 그게 이 모임이 바라는 전부예요.</p>
+  </div>
+
+  <!-- 일정 -->
+  <div class="section">
+    <h2>6주 동안 이렇게 진행돼요.</h2>
+    <div class="schedule-grid">
+      <div class="schedule-row header">
+        <div class="schedule-cell">주차</div>
+        <div class="schedule-cell">형식</div>
+        <div class="schedule-cell">내용</div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-cell">1주</div>
+        <div class="schedule-cell">온라인 콜</div>
+        <div class="schedule-cell">온보딩 — 각자의 꿈, 왜 그 꿈인지, 무엇을 기대하는지</div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-cell">2주</div>
+        <div class="schedule-cell">콜 + 회고</div>
+        <div class="schedule-cell">첫 실행 공유 및 점검</div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-cell">3주</div>
+        <div class="schedule-cell">회고</div>
+        <div class="schedule-cell">위클리 회고 작성</div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-cell">4주</div>
+        <div class="schedule-cell">콜 + 회고</div>
+        <div class="schedule-cell">중간 점검, 감정·시행착오 나누기</div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-cell">5주</div>
+        <div class="schedule-cell">회고</div>
+        <div class="schedule-cell">위클리 회고 작성</div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-cell">6주</div>
+        <div class="schedule-cell">콜 + 회고</div>
+        <div class="schedule-cell">마무리 공유, 6주간의 변화 돌아보기</div>
+      </div>
+    </div>
+    <p style="margin-top:20px; font-size:14px; color:#888;">실행은 각자 개별로 진행하고, 카톡방 자유 기록 + 노션 회고 + 콜 공유로 서로의 과정을 함께 봅니다.</p>
+  </div>
+
+  <!-- 디파짓 -->
+  <div class="section">
+    <h2>디파짓 안내</h2>
+    <p style="margin-bottom:24px;">참여비는 무료이며, 디파짓 4만원을 사전에 납부해요.<br/>6주 실행 기준(회고 5회 + 콜 3회 = 총 8회)에 따라 아래와 같이 정산돼요.</p>
+    <div class="deposit-box">
+      <div class="deposit-row">
+        <span class="label">8회 개근</span>
+        <span>4만원 전액 환불 + 2기 우선 참여권</span>
+      </div>
+      <div class="deposit-row">
+        <span class="label">1회 미이행 시</span>
+        <span>5,000원씩 차감</span>
+      </div>
+      <div class="deposit-row">
+        <span class="label">4회 이하 이행</span>
+        <span>차감 환불 + 2기 신청 불가</span>
+      </div>
+      <div class="account">
+        <span>국민은행 5490101186194 · 김*진</span>
+        <span class="bank">선정 후 안내</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 이런 분 찾아요 -->
+  <div class="section">
+    <h2>이런 분을 찾아요.</h2>
+    <ul class="list-items">
+      <li>오래 미뤄둔 꿈을 지금 꺼내보고 싶은 분</li>
+      <li>실행 의지가 있고, 스스로 움직일 수 있는 분</li>
+      <li>비슷한 결의 사람들과 진지하게 연결되고 싶은 분</li>
+    </ul>
+    <p style="margin-top:24px;">건성건성 참여하거나 이끌어줘야 움직이는 자리가 아니에요.<br/>스스로 하고 싶어서 오는 사람들과 함께할 거예요.</p>
+  </div>
+
+  <!-- 운영자 -->
+  <div class="section">
+    <h2>운영자 도진입니다.</h2>
+    <div class="operator-box">
+      <p>저도 이번 1기에 참가자로 함께 실행합니다.<br/>이 모임은 저의 언젠가, 지금! 이기도 해요.</p>
+      <p style="margin-top:12px;">완성된 사람이 이끄는 모임이 아니라,<br/>같이 꺼내보고 같이 기록하는 모임입니다.</p>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h2>지금, 신청하세요.</h2>
+    <p>신청서를 검토 후 선정된 분께 개별 안내드립니다.<br/>모집 마감 6월 7일</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdZPPKHNGqGgFOP31PkCLJaznuG-DAeNCet2uRtXMtOiNP5iQ/viewform?usp=sharing&ouid=115967052564411127105" target="_blank" rel="noopener" class="cta-btn">신청하기</a>
+    <p class="cta-note" style="color:#666;">참여비 무료 · 디파짓 4만원 · 소수정예 선발</p>
+  </div>
+
+  <div class="footer">
+    © 2025 언젠가, 지금!
+  </div>
+
+</body>
+</html>
